@@ -64,7 +64,7 @@ lspconfig.gopls.setup {
       staticcheck = true,
       analyses = {
         nilness = true,
-        shadow = true,
+        shadow = false,
         unusedparams = true,
         unusewrites = true,
       },

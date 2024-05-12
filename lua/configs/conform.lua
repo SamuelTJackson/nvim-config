@@ -6,9 +6,10 @@ local options = {
     ["terraform-vars"] = { "terraform_fmt" },
     tf = { "terraform_fmt" },
     hcl = { "terragrunt_hclfmt" },
+    sql = { "sql_formatter" },
     -- css = { "prettier" },
     -- html = { "prettier" },
-    ["*"] = { "codespell" },
+    -- ["*"] = { "codespell" },
   },
 
   format_on_save = {

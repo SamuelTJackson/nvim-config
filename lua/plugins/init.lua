@@ -41,6 +41,16 @@ return {
         "go",
         "terraform",
         "hcl",
+        "typescript",
+        "javascript",
+        "tsx",
+        "markdown",
+        "dockerfile",
+        "bash",
+        "markdown",
+        "python",
+        "yaml",
+        "json"
       },
     },
   },
@@ -75,6 +85,7 @@ return {
   },
   {
     "kwkarlwang/bufjump.nvim",
+    enabled = false,
     opts = {
       config = function()
         require("bufjump").setup()
@@ -136,14 +147,20 @@ return {
     build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
   },
   {
-    "charludo/projectmgr.nvim",
-    lazy = false, -- important!
+    "ahmedkhalf/project.nvim",
+    lazy = false,
     config = function()
-      require("projectmgr").setup {
-        autogit = {
-          enabled = false,
+      require("project_nvim").setup {
+        show_hidden = true,
+      }
+      require("telescope").load_extension "projects"
+      require("nvim-tree").setup {
+        sync_root_with_cwd = true,
+        respect_buf_cwd = true,
+        update_focused_file = {
+          enable = true,
+          update_root = true,
         },
-        session = { enabled = true, file = ".git/Session.vim" },
       }
     end,
   },
@@ -226,7 +243,6 @@ return {
       "DBUIFindBuffer",
     },
     init = function()
-      -- Your DBUI configuration
       vim.g.db_ui_use_nerd_fonts = 1
       vim.g.db_ui_execute_on_save = 0
       vim.g.db_ui_win_position = "right"
@@ -252,8 +268,8 @@ return {
       vim.g.VM_mouse_mappings = 0
 
       vim.g.VM_maps = {
-        ["Select Cursor Down"] = "<Down>",
-        ["Select Cursor Up"] = "<Up>",
+        ["Select Cursor Down"] = "<C-u>",
+        ["Select Cursor Up"] = "<C-i>",
         ["Switch Mode"] = "<Tab>",
       }
     end,

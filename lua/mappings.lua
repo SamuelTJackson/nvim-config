@@ -4,24 +4,17 @@ local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jj", "<ESC>")
-map("n", "nf", "<cmd>NvimTreeToggle<CR>", { desc = "Nvimtree toggle" })
 
 map("n", "<leader>jb", "<C-o>", { desc = "Jump backward buffer" })
-map("n", "<leader>jf", "<C-i>", { desc = "Jump backward buffer" })
-
-map("n", "<leader>jbb", function()
-  require("bufjump").backward()
-end, { desc = "Jump backward buffer" })
-
-map("n", "<leader>jfb", function()
-  require("bufjump").forward()
-end, { desc = "Jump forward buffer" })
+map("n", "<leader>jf", "<C-i>", { desc = "Jump forward buffer" })
 
 map("n", "<leader>sw", function()
   require("hop").hint_patterns()
 end, { desc = "Hop to word" })
 
-map("n", "<leader>op", ":wa<CR><cmd>ProjectMgr<CR>", { desc = "Open projects" })
+map("n", "<leader>op", function()
+  require("telescope").extensions.projects.projects {}
+end, { desc = "Open projects" })
 
 -- Go mappings
 map("n", "<leader>gi", "<cmd>GoImports<CR>", { desc = "Go imports" })
@@ -33,12 +26,15 @@ end, { desc = "Implement some interface" })
 
 map("n", "<leader>gat", function()
   local input = vim.fn.input "Tag name: "
+  vim.cmd ":w"
   vim.cmd(":GoTagAdd " .. input)
 end, { desc = "Add go tags to struct" })
 
 -- nvimtree
-map("n", "<leader>ft", "<cmd>NvimTreeFocus<CR>", { desc = "Nvim tree focus browser" })
 map("n", "<leader>tf", "<cmd>NvimTreeFocus<CR>", { desc = "Nvim tree focus browser" })
+map("n", "tt", "<cmd>NvimTreeToggle<CR>", { desc = "Nvimtree toggle" })
+map("n", "tc", "<cmd>NvimTreeClose<CR>", { desc = "Nvimtree toggle" })
+map("n", "nt", "<cmd>NvimTreeToggle<CR>", { desc = "Nvimtree toggle" })
 
 -- general mappings
 map("n", "<leader>vr", "<cmd>Lspsaga rename ++project<CR>", { desc = "Rename variable" })
@@ -113,3 +109,30 @@ end)
 map("n", "<leader>hn", function()
   harpoon:list():next()
 end)
+
+--refactoring
+--vim.keymap.set("x", "<leader>re", function() require('refactoring').refactor('Extract Function') end)
+map("x", "<leader>rf", function()
+  require("refactoring").refactor "Extract Function To File"
+end, { desc = "" })
+-- Extract function supports only visual mode
+map("x", "<leader>rv", function()
+  require("refactoring").refactor "Extract Variable"
+end, { desc = "" })
+-- Extract variable supports only visual mode
+map("n", "<leader>rI", function()
+  require("refactoring").refactor "Inline Function"
+end, { desc = "" })
+-- Inline func supports only normal
+map({ "n", "x" }, "<leader>ri", function()
+  require("refactoring").refactor "Inline Variable"
+end, { desc = "" })
+-- Inline var supports both normal and visual mode
+
+map("n", "<leader>rb", function()
+  require("refactoring").refactor "Extract Block"
+end, { desc = "" })
+map("n", "<leader>rbf", function()
+  require("refactoring").refactor "Extract Block To File"
+end, { desc = "" })
+-- Extract block supports only normal mode
