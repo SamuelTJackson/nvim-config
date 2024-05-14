@@ -1,5 +1,13 @@
 require "nvchad.mappings"
 
+-- Disable mappings
+local nomap = vim.keymap.del
+
+nomap("n", "<C-n>")
+nomap("n", "<leader>h")
+nomap("n", "<leader>n")
+nomap("n", "<leader>gt")
+
 local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
@@ -30,6 +38,8 @@ map("n", "<leader>gat", function()
   vim.cmd(":GoTagAdd " .. input)
 end, { desc = "Add go tags to struct" })
 
+map("n", "<leader>gtf", ":wa<CR><cmd>GoTestFile<CR>", { desc = "Fill go struct" })
+
 -- nvimtree
 map("n", "<leader>tf", "<cmd>NvimTreeFocus<CR>", { desc = "Nvim tree focus browser" })
 map("n", "tt", "<cmd>NvimTreeToggle<CR>", { desc = "Nvimtree toggle" })
@@ -49,12 +59,8 @@ map("n", "<C-j>", "<Plug>(VM-Find-Under)", { desc = "Multi line find under" })
 --DB
 map("n", "<leader>dbt", "<cmd>DBUIToggle<CR>", { desc = "DB ui toggle" })
 
--- Disable mappings
-local nomap = vim.keymap.del
-
-nomap("n", "<C-n>")
-nomap("n", "<leader>h")
-nomap("n", "<leader>n")
+--quicklist
+map("n", "<leader>qc", ":cclose<CR>", { desc = "Fill go struct" })
 
 --Harpoon
 --

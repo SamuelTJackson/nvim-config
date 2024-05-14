@@ -7,6 +7,7 @@ local options = {
     tf = { "terraform_fmt" },
     hcl = { "terragrunt_hclfmt" },
     sql = { "sql_formatter" },
+    json = { "jq" },
     -- css = { "prettier" },
     -- html = { "prettier" },
     -- ["*"] = { "codespell" },

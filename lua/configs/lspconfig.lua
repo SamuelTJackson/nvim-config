@@ -5,7 +5,7 @@ local conf = require("nvconfig").ui.lsp
 local map = vim.keymap.set
 
 local lspconfig = require "lspconfig"
-local servers = { "html", "cssls", "terraformls", "golangci_lint_ls" }
+local servers = { "html", "cssls", "terraformls", "golangci_lint_ls" ,"pyright"}
 
 local on_attach = function(client, bufnr)
   local function opts(desc)
